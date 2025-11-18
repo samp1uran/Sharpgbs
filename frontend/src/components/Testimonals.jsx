@@ -12,7 +12,7 @@ const testimonials = [
     image: "/test2.jpeg",
   },
   {
-    name: "Jennifer",
+    name: "Janvi",
     feedback:
       "Highly recommend Sharp GBS! Their attention to detail and support made a huge difference in our workflow.",
     image: "/test3.jpeg",
