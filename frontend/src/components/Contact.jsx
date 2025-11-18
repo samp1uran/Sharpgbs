@@ -12,7 +12,7 @@ export default function ContactUs() {
     message: "",
   });
   const [success, setSuccess] = useState(false);
-
+  const [sending,setSending]=useState('Send Message')
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -21,6 +21,7 @@ export default function ContactUs() {
     e.preventDefault();
 
     try {
+      setSending('Sending')
       const res = await axios.post(`${API_URL}/contact`, form);
       if (res.status===200) {
         setSuccess(true);
@@ -28,6 +29,9 @@ export default function ContactUs() {
       }
     } catch (err) {
       console.error("Error submitting form:", err);
+    }
+    finally{
+      setSending('Send Message')
     }
   };
 
@@ -101,7 +105,7 @@ export default function ContactUs() {
                   variant="contained"
                   className="!bg-black !text-white !normal-case !whitespace-nowrap !px-6 !h-fit !py-3 md:!py-3 md:!px-6  !rounded hover:bg-gray-800 transition"
                 >
-                  Send Message
+                  {sending}
                 </Button>
               </div>
             </form>
