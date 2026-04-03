@@ -18,12 +18,9 @@ const Footer = () => {
             />
             <div className="font-bold text-lg tracking-tight">Sharp Gbs</div>
           </Link>
-                    {/* Bottom Section: Copyright */}
-        <div className="border-t border-gray-700 pt-6">
-          <p className="text-center text-gray-400 text-sm">
-            &copy; {currentYear} <span className="text-white font-semibold">Sharp Gbs</span>. All Rights Reserved.
-          </p>
-        </div>
+             <p className="text-center text-gray-400 text-sm">
+                &copy; {currentYear} <span className="text-white font-semibold">Sharp Gbs</span>. All Rights Reserved.
+            </p>
           <div className="flex items-center space-x-8">
             <a
               href="https://www.linkedin.com/company/sharp-gbs/?viewAsMember=true"
