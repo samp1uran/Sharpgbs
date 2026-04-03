@@ -13,7 +13,9 @@ import { AnimatePresence } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ToastContainer } from "react-toastify";
-
+import WhatsAppIcon from "./components/WhatsAppIcon";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 function App() {
   useEffect(() => {
     AOS.init({
@@ -22,7 +24,19 @@ function App() {
     });
   }, []);
   return (
-    <>
+    <<div className="relative">
+      <Navbar />
+      
+      {/* Your Page Content */}
+      <main>
+        {/* Routes go here */}
+      </main>
+
+      <Footer />
+
+      {/* Logic: Placing it here ensures it floats above EVERYTHING */}
+      <WhatsAppIcon />
+    </div>>
       <AnimatePresence mode="wait">
         <Routes>
           <Route path="/" element={<Home />} />
