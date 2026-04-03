@@ -7,6 +7,9 @@ const Footer = () => {
     <footer className="bg-gray-800 text-white py-6">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
         <Link to="/" className="flex items-center gap-2">
+          <p>
+            &copy; {currentYear} Sharp Gbs. All Rights Reserved.
+          </p>
           <img
             src="/Logo.jpg"
             alt="Sharp Gbs Logo"
