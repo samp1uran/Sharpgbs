@@ -59,6 +59,9 @@ const About = () => {
               Our Mission
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+               <div className="rounded-xl  transition-normal duration-400 hover:scale-105">
+                  <Image src="/mission.png" alt="Mission" obj="contain" />
+                </div>
               <p className="md:w-1/2 text-lg text-gray-700 leading-relaxed">
                 Our mission is to deliver high-quality, reliable services that
               enable our clients to focus on what they do best—growing their
@@ -68,9 +71,6 @@ const About = () => {
               support and expertise you need to thrive in a competitive
               landscape.
               </p>
-              <div className="rounded-xl  transition-normal duration-400 hover:scale-105">
-                <Image src="https://www.globepanel.in/img/mission-img.png" alt="Mission" obj="contain" />
-              </div>
             </div>
           </section>
 
