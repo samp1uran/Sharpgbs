@@ -10,10 +10,10 @@ const About = () => {
         data-aos-once="false"
       >
         <div className="space-y-8">
-          <h1 className="text-4xl font-bold text-gray-900">About Us:</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Why Partners Choose Sharp Gbs</h1>
           <section className="bg-gray-50 p-6 rounded-xl shadow-xl">
             <h2 className="text-center text-3xl text-gray-800 drop-shadow-sm font-bold mb-7">
-              Sharp Gbs
+              Strategy Meets Execution.
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <p className="md:w-1/2 text-lg text-gray-700 leading-relaxed">
