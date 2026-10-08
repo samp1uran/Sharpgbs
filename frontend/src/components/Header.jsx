@@ -1,133 +1,117 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { ListItemButton } from "@mui/material";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
   const handleClick = () => {
     setMenuOpen(false);
   };
 
+  const isActive = (path) => location.pathname === path;
+
+  // Add a subtle shadow when scrolling down for a modern feel
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Privacy", path: "/privacy" },
+    { name: "Terms", path: "/terms" },
+  ];
+
   return (
-    <>
-      <header className="bg-gray-800 text-white px-4 py-3 flex justify-between items-center relative">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img
-            src="/Logo.jpg"
-            alt="Sharp Gbs Logo"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-          <div className="font-bold text-xl">Sharp Gbs</div>
-        </Link>
-
-        {/* Hamburger */}
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-0 items-center">
-          <Link to="/">
-            <Button
-              variant="contained"
-              className="!text-base !shadow-none !bg-gray-800 !normal-case"
-            >
-              Home
-            </Button>
+    <header 
+      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${
+        scrolled 
+          ? "bg-slate-950/85 backdrop-blur-lg border-slate-800/50 shadow-lg" 
+          : "bg-slate-950 border-slate-800"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Increased height to h-20 (80px) to give the larger logo breathing room */}
+        <div className="flex justify-between items-center h-20">
+          
+          {/* Logo - Increased Size and Typography */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-4 group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl p-1"
+          >
+            <div className="relative overflow-hidden rounded-full shadow-md">
+              <img
+                src="/Logo.jpg"
+                alt="Sharp Gbs Logo"
+                className="w-14 h-14 object-cover border-2 border-slate-700 group-hover:border-blue-500 transform group-hover:scale-110 transition-all duration-300 ease-out"
+              />
+            </div>
+            {/* Increased text size to 3xl and tightened tracking for a sleeker look */}
+            <span className="font-extrabold text-3xl tracking-tighter text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-400 transition-all duration-300">
+              Sharp Gbs
+            </span>
           </Link>
 
-          <Link to="/about">
-            <Button
-              variant="contained"
-              className="!text-base !shadow-none !bg-gray-800 !normal-case"
-            >
-              About
-            </Button>
-          </Link>
-          <Link to="/contact">
-            <Button
-              variant="contained"
-              className="!text-base !shadow-none !bg-gray-800 !normal-case"
-            >
-              Contact
-            </Button>
-          </Link>
-          <Link to="/privacy">
-            <Button
-              variant="contained"
-              className="!text-base !shadow-none !bg-gray-800 !normal-case"
-            >
-              Privacy
-            </Button>
-          </Link>
-          <Link to="/terms">
-            <Button
-              variant="contained"
-              className="!text-base !shadow-none !bg-gray-800 !normal-case"
-            >
-              Terms
-            </Button>
-          </Link>
-        </nav>
+          {/* Mobile Hamburger Button */}
+          <button 
+            className="md:hidden text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-1 transition-colors" 
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          </button>
 
-        <div
-          className={`absolute top-full left-0 w-full bg-gray-800 md:hidden overflow-hidden transition-all duration-50 ease-in-out z-10
-    ${menuOpen ? "max-h-[1000px] py-3 px-4 flex flex-col gap-2" : "h-0 px-4"}
-  `}
-        >
-          <ListItemButton
-            component={Link}
-            to="/"
-            onClick={handleClick}
-            className="!py-1.5 !px-2 !text-base !shadow-none !bg-gray-800 !normal-case"
-          >
-            Home
-          </ListItemButton>
-          <ListItemButton
-            component={Link}
-            to="/about"
-            onClick={handleClick}
-            className="!py-1.5 !px-2 !text-base !shadow-none !bg-gray-800 !normal-case"
-          >
-            About
-          </ListItemButton>
-          <ListItemButton
-            component={Link}
-            to="/contact"
-            onClick={handleClick}
-            className="!py-1 !px-2 !text-base !shadow-none !bg-gray-800 !normal-case"
-          >
-            Contact
-          </ListItemButton>
-
-          <ListItemButton
-            component={Link}
-            to="/privacy"
-            onClick={handleClick}
-            className="!py-1 !px-2 !text-base !shadow-none !bg-gray-800 !normal-case"
-          >
-            Privacy
-          </ListItemButton>
-          <ListItemButton
-            component={Link}
-            to="/terms"
-            onClick={handleClick}
-            className="!py-1 !px-2 !text-base !shadow-none !bg-gray-800 !normal-case"
-          >
-            Terms
-          </ListItemButton>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-1.5 items-center">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                  isActive(link.path)
+                    ? "bg-slate-800/80 text-blue-400 shadow-sm"
+                    : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
         </div>
-      </header>
-
-      <div className="px-6 py-2 max-w-5xl mx-auto leading-relaxed">
-        <marquee>
-          <p className="my-4 text-2xl text-gray-800 font-semibold drop-shadow-sm ">Welcome to Sharp Gbs</p>
-        </marquee>
       </div>
-    </>
+
+      {/* Mobile Dropdown Nav */}
+      <div
+        className={`md:hidden absolute top-full left-0 w-full bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 overflow-hidden transition-all duration-300 ease-in-out shadow-2xl ${
+          menuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 border-transparent"
+        }`}
+      >
+        <nav className="flex flex-col px-4 py-3 space-y-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              onClick={handleClick}
+              className={`block px-4 py-3.5 rounded-xl text-base font-semibold transition-colors ${
+                isActive(link.path)
+                  ? "bg-slate-800 text-blue-400"
+                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
 

@@ -6,9 +6,11 @@ const pageVariants = {
   exit: { opacity: 0, y: -20 },
 };
 
+const MotionDiv = motion.div;
+
 const AnimatedPage = ({ children }) => {
   return (
-    <motion.div
+    <MotionDiv
       variants={pageVariants}
       initial="initial"
       animate="animate"
@@ -17,7 +19,7 @@ const AnimatedPage = ({ children }) => {
       className="min-h-screen"
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 
