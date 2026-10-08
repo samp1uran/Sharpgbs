@@ -2,7 +2,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppIcon = () => {
-  const phoneNumber = "919097778000"; // Format: 911234567890 (No +, no spaces)
+  const phoneNumber = "918069158224"; // Format: 911234567890 (No +, no spaces)
   const whatsappUrl = `https://wa.me/${phoneNumber}`;
 
   return (

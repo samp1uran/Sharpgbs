@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./index.css";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
@@ -15,7 +15,7 @@ import "aos/dist/aos.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
 import WhatsAppIcon from "./components/WhatsAppIcon";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 function App() {
@@ -27,37 +27,47 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/services/financialServices"
-              element={<FinancialServices />}
-            />
-            <Route path="/services/development" element={<Development />} />
-          </Routes>
-        </AnimatePresence>
-      </main>
-      <Footer />
-      <WhatsAppIcon />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-        draggable
-        limit={3}
-      />
-    </div>
+    <Router>
+      <div className="relative min-h-screen flex flex-col">
+        {/* 1. Global Navigation */}
+        <Navbar />
+        
+        {/* 2. Main Content Area with Route Animations */}
+        <main className="flex-grow">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route
+                path="/services/financialServices"
+                element={<FinancialServices />}
+              />
+              <Route path="/services/development" element={<Development />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+
+        {/* 3. Global Footer */}
+        <Footer />
+
+        {/* 4. Persistent Floating Elements */}
+        <WhatsAppIcon />
+        
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
+          draggable
+          limit={3}
+        />
+      </div>
+    </Router>
   );
 }
 
