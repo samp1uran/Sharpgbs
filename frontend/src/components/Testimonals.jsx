@@ -3,15 +3,15 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     name: "Rohit Tiwari",
+    initials: "RT",
     feedback:
       "Sharp GBS has transformed the way we manage our operations. Their service is prompt, professional, and always reliable.",
-    image: "/test1.jpeg",
   },
   {
     name: "Priya Mehta",
+    initials: "PM",
     feedback:
       "Impressive team and even better results. Sharp GBS truly understands what businesses need and delivers beyond expectations.",
-    image: "/test2.jpeg",
   },
   {
     name: "Janvi",
@@ -32,10 +32,10 @@ const testimonials = [
       "Sharp GBS provided professional support and helped us find the right solutions for our business needs.",
   },
   {
-    name: "Furniture World",
-    initials: "FW",
+    name: "Ram Singh",
+    initials: "RS",
     feedback:
-      "Sharp GBS provided professional support and helped us find the right solutions for our business needs.",
+      "Working with the team at Sharp GBS has been a game-changer for our organization. They took the time to deeply understand our challenges and delivered tailored solutions that perfectly aligned with our business goals.",
   },
 ];
 
