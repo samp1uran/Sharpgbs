@@ -15,7 +15,7 @@ import "aos/dist/aos.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
 import WhatsAppIcon from "./components/WhatsAppIcon";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
@@ -29,11 +29,10 @@ function App() {
   return (
     <Router>
       <div className="relative min-h-screen flex flex-col">
-        {/* 1. Global Navigation */}
-        <Navbar />
+        <Header />
         
         {/* 2. Main Content Area with Route Animations */}
-        <main className="flex-grow">
+        <div className="flex-grow">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -49,7 +48,7 @@ function App() {
               <Route path="/services/development" element={<Development />} />
             </Routes>
           </AnimatePresence>
-        </main>
+        </div>
 
         {/* 3. Global Footer */}
         <Footer />

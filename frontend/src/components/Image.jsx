@@ -1,22 +1,44 @@
 import { useState } from "react";
 
-const Image = ({ src, alt,obj="cover" }) => {
+const Image = ({ src, alt, obj = "cover" }) => {
   const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const imageClass =
+    obj === "contain"
+      ? "max-h-[400px] w-full object-contain"
+      : "absolute inset-0 h-full w-full object-cover";
 
   return (
-    <div className="relative w-full h-auto overflow-hidden">
-      {!loaded && (
-        <div className="w-full h-[480px] bg-gray-200 animate-pulse rounded-lg" />
+    <div
+      className={`relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-100 ${
+        obj === "contain" ? "min-h-56 p-4" : "aspect-[4/3]"
+      }`}
+    >
+      {!loaded && !failed && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 animate-pulse bg-slate-200"
+        />
       )}
-
-      <img
-        src={src}
-        alt={alt}
-        onLoad={() => setLoaded(true)}
-        className={`w-full transition-opacity duration-500 h-auto max-h-[400px] object-${obj} rounded-2xl mb-4 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      {failed ? (
+        <span
+          role="img"
+          aria-label={`${alt} image unavailable`}
+          className="p-6 text-center text-sm text-slate-500"
+        >
+          Image unavailable
+        </span>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={`${imageClass} transition-opacity duration-300 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
     </div>
   );
 };

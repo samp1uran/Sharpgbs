@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+const MotionDiv = motion.div;
+
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -8,7 +10,7 @@ const pageVariants = {
 
 const AnimatedPage = ({ children }) => {
   return (
-    <motion.div
+    <MotionDiv
       variants={pageVariants}
       initial="initial"
       animate="animate"
@@ -17,7 +19,7 @@ const AnimatedPage = ({ children }) => {
       className="min-h-screen"
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 

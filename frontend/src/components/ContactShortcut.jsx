@@ -3,26 +3,27 @@ import { ArrowRight } from "lucide-react";
 
 function ContactShortcut() {
   return (
-    <div className="flex flex-col items-center justify-center space-y-6 text-center w-full">
-      
+    <div className="flex w-full flex-col items-center justify-center space-y-6 text-center">
       <div className="space-y-3">
-        <h3 className="text-2xl md:text-3xl font-bold tracking-tight drop-shadow-sm text-inherit">
-          🚀 Let’s Elevate Your Brand
+        <h3 className="text-2xl font-bold tracking-tight text-inherit md:text-3xl">
+          Let’s build something great together.
         </h3>
-        <p className="max-w-md mx-auto text-lg leading-relaxed text-inherit opacity-80">
-          Create compelling, consistent content that builds trust and drives
-          results. Reach out today!
+        <p className="mx-auto max-w-md text-base leading-relaxed text-inherit opacity-80 md:text-lg">
+          Tell us what your business needs. We’d love to explore how Sharp GBS
+          can help.
         </p>
       </div>
 
-      <Link 
+      <Link
         to="/contact"
-        className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold text-white transition-all duration-300 ease-in-out bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,99,235,0.4)]"
+        className="group inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3.5 text-base font-semibold text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:shadow-xl"
       >
-        <span className="relative z-10">Get in Touch</span>
-        <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+        <span>Get in touch</span>
+        <ArrowRight
+          aria-hidden="true"
+          className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1"
+        />
       </Link>
-      
     </div>
   );
 }

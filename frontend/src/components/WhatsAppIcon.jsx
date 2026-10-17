@@ -1,4 +1,3 @@
-// src/components/WhatsAppIcon.jsx
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppIcon = () => {
@@ -10,15 +9,14 @@ const WhatsAppIcon = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      // CRITICAL: "fixed" puts it on the screen, "z-[999]" puts it on top
-      className="fixed bottom-10 right-10 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center"
-      style={{ width: '60px', height: '60px' }} 
+      className="fixed bottom-5 right-5 z-[999] isolate flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform duration-300 hover:scale-110 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
       aria-label="Contact us on WhatsApp"
     >
-      <FaWhatsapp size={32} />
-      
-      {/* Visual Cue: This pulse makes it stand out */}
-      <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25"></span>
+      <FaWhatsapp className="relative z-10 h-8 w-8" aria-hidden="true" />
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 z-0 animate-ping rounded-full bg-[#25D366] opacity-25"
+      />
     </a>
   );
 };
