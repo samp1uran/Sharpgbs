@@ -17,6 +17,13 @@ const testimonials = [
       "Highly recommend Sharp GBS! Their attention to detail and support made a huge difference in our workflow.",
     image: "/test3.png",
   },
+  {
+    name: "Satvir Singh",
+    initials: "SS",
+    website: "https://azcoatingssolutions.in",
+    feedback:
+    "Their 24/7 technical assistance and prompt bug resolution saved our product launch window. You can always count on the Sharp GBS support team.",
+  },
 ];
 
 const Testimonials = () => {
@@ -43,6 +50,16 @@ const Testimonials = () => {
                 />
                 <div>
                   <h4 className="font-semibold text-gray-800">{t.name}</h4>
+                    {t.website && (
+                    <a
+                      href={t.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm text-blue-700 underline"
+                    >
+                      azcoatingssolutions.in
+                    </a>
+                  )}
                 </div>
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
