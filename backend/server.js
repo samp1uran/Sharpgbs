@@ -33,6 +33,8 @@ const transporter =
     : null;
 
 app.post(["/contact", "/api/contact"], async (req, res) => {
+  let stage = "configuration";
+
   try {
     if (!supabase || !transporter) {
       console.error(
@@ -52,7 +54,7 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
         .json({ success: false, msg: "All fields required" });
     }
 
-    // Insert into Supabase
+    stage = "database";
     const { error: insertError } = await supabase
       .from("contacts")
       .insert([{ name, email, phone, message }]);
@@ -61,7 +63,7 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
       throw insertError;
     }
 
-    // Send Email
+    stage = "email";
     const mailOptions = {
       from: `"Website Contact Form" <${email}>`,
       to: emailUser,
@@ -79,8 +81,31 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Server error:", err);
-    return res.status(500).json({ success: false, msg: "Internal error" });
+    console.error("Contact submission failed:", {
+      stage,
+      message: err instanceof Error ? err.message : String(err),
+    });
+
+    if (stage === "email") {
+      return res.status(502).json({
+        success: false,
+        code: "CONTACT_EMAIL_FAILED",
+        msg: "Your message was saved, but the email notification failed. Please do not submit it again; contact us on WhatsApp if your request is urgent.",
+      });
+    }
+
+    if (stage === "database") {
+      return res.status(500).json({
+        success: false,
+        code: "CONTACT_SAVE_FAILED",
+        msg: "We could not save your message. Please try again later or contact us on WhatsApp.",
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      msg: "The contact service could not process your request. Please contact the site administrator.",
+    });
   }
 });
 
