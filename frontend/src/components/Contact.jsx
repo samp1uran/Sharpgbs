@@ -54,7 +54,10 @@ function Contact() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/contact", {
+      const contactEndpoint = import.meta.env.DEV
+        ? "http://localhost:5000/contact"
+        : "/api/contact";
+      const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
