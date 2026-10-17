@@ -22,7 +22,7 @@ const testimonials = [
     initials: "SS",
     website: "https://azcoatingssolutions.in",
     feedback:
-    "Their 24/7 technical assistance and prompt bug resolution saved our product launch window. You can always count on the Sharp GBS support team.",
+      "Their 24/7 technical assistance and prompt bug resolution saved our product launch window. You can always count on the Sharp GBS support team.",
   },
 ];
 
@@ -43,14 +43,23 @@ const Testimonials = () => {
               className="backdrop-blur-lg bg-white/30 border border-white/40 shadow-2xl rounded-2xl p-6 text-left transition transform hover:-translate-y-1 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)]"
             >
               <div className="flex items-center gap-4 mb-4">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-14 h-14 rounded-full border-2 border-white object-cover"
-                />
+                {t.initials ? (
+                  <div
+                    aria-label={`${t.name} initials`}
+                    className="w-14 h-14 rounded-full border-2 border-white bg-purple-700 text-white flex items-center justify-center font-bold"
+                  >
+                    {t.initials}
+                  </div>
+                ) : (
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-14 h-14 rounded-full border-2 border-white object-cover"
+                  />
+                )}
                 <div>
                   <h4 className="font-semibold text-gray-800">{t.name}</h4>
-                    {t.website && (
+                  {t.website && (
                     <a
                       href={t.website}
                       target="_blank"
