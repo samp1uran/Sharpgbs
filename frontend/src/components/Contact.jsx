@@ -62,7 +62,20 @@ function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const result = await response.json();
+      const responseBody = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseBody);
+      } catch {
+        console.error("Contact endpoint returned a non-JSON response.", {
+          status: response.status,
+          body: responseBody.slice(0, 500),
+        });
+        throw new Error(
+          `The contact service returned an unexpected response (HTTP ${response.status}). Please try again later or contact us on WhatsApp.`,
+        );
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(result.msg || "Unable to send your message.");

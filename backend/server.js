@@ -10,25 +10,40 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Supabase client
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const emailUser = process.env.EMAIL_USER;
+const emailPass = process.env.EMAIL_PASS;
 
-// Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  logger: true,
-  debug: true,
-});
+const supabase =
+  supabaseUrl && supabaseServiceRoleKey
+    ? createClient(supabaseUrl, supabaseServiceRoleKey)
+    : null;
+const transporter =
+  emailUser && emailPass
+    ? nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: emailUser,
+          pass: emailPass,
+        },
+        logger: true,
+        debug: true,
+      })
+    : null;
 
 app.post(["/contact", "/api/contact"], async (req, res) => {
   try {
+    if (!supabase || !transporter) {
+      console.error(
+        "Contact service is missing required Supabase or email configuration.",
+      );
+      return res.status(503).json({
+        success: false,
+        msg: "The contact service is not configured. Please contact the site administrator.",
+      });
+    }
+
     const { name, email, phone, message } = req.body;
 
     if (!name || !email || !phone || !message) {
@@ -38,12 +53,18 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
     }
 
     // Insert into Supabase
-    await supabase.from("contacts").insert([{ name, email, phone, message }]);
+    const { error: insertError } = await supabase
+      .from("contacts")
+      .insert([{ name, email, phone, message }]);
+
+    if (insertError) {
+      throw insertError;
+    }
 
     // Send Email
     const mailOptions = {
       from: `"Website Contact Form" <${email}>`,
-      to: process.env.EMAIL_USER, // send email to yourself
+      to: emailUser,
       subject: "New Contact Form Submission",
       html: `
         <h2>New Contact Message</h2>
@@ -61,6 +82,17 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
     console.error("Server error:", err);
     return res.status(500).json({ success: false, msg: "Internal error" });
   }
+});
+
+app.use((err, _req, res, next) => {
+  if (err?.type === "entity.parse.failed") {
+    return res.status(400).json({
+      success: false,
+      msg: "Request body must be valid JSON.",
+    });
+  }
+
+  next(err);
 });
 
 const PORT = process.env.PORT || 5000;
