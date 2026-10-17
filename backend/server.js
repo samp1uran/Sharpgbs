@@ -81,9 +81,19 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
 
     return res.status(200).json({ success: true });
   } catch (err) {
+    const errorDetails =
+      err && typeof err === "object"
+        ? err
+        : { message: String(err) };
+    const errorCode =
+      typeof errorDetails.code === "string" ? errorDetails.code : undefined;
+    const errorMessage =
+      typeof errorDetails.message === "string" ? errorDetails.message : "";
+
     console.error("Contact submission failed:", {
       stage,
-      message: err instanceof Error ? err.message : String(err),
+      code: errorCode,
+      message: errorMessage,
     });
 
     if (stage === "email") {
@@ -95,10 +105,42 @@ app.post(["/contact", "/api/contact"], async (req, res) => {
     }
 
     if (stage === "database") {
+      const normalizedMessage = errorMessage.toLowerCase();
+      let msg =
+        "We could not save your message. Please try again later or contact us on WhatsApp.";
+
+      if (
+        errorCode === "42P01" ||
+        errorCode === "PGRST205" ||
+        /relation .* does not exist|could not find the table/.test(
+          normalizedMessage,
+        )
+      ) {
+        msg =
+          "The Supabase public.contacts table is missing. Create it with name, email, phone, and message columns, then try again.";
+      } else if (
+        errorCode === "42703" ||
+        errorCode === "PGRST204" ||
+        /column .* does not exist|could not find the .* column/.test(
+          normalizedMessage,
+        )
+      ) {
+        msg =
+          "The Supabase contacts table is missing a required column. Check that it has name, email, phone, and message columns.";
+      } else if (
+        errorCode === "42501" ||
+        /permission denied|row.level security/.test(normalizedMessage)
+      ) {
+        msg =
+          "Supabase denied access to the contacts table. Check that Vercel uses the Supabase secret or service_role key for SUPABASE_SERVICE_ROLE_KEY.";
+      } else if (errorCode) {
+        msg = `Supabase could not save your message (database error ${errorCode}). Check the Supabase logs for details.`;
+      }
+
       return res.status(500).json({
         success: false,
         code: "CONTACT_SAVE_FAILED",
-        msg: "We could not save your message. Please try again later or contact us on WhatsApp.",
+        msg,
       });
     }
 
