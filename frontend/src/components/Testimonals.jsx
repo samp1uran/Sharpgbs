@@ -1,5 +1,3 @@
-import { Quote } from "lucide-react";
-
 const testimonials = [
   {
     name: "Rohit Tiwari",
@@ -79,10 +77,6 @@ const Testimonials = () => {
                   <h3 className="font-semibold text-slate-900">{t.name}</h3>
                 </div>
               </div>
-              <Quote
-                aria-hidden="true"
-                className="mb-2 h-5 w-5 text-blue-600"
-              />
               <p className="flex-1 text-sm leading-6 text-slate-600">
                 {t.feedback}
               </p>
