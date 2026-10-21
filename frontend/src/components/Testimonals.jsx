@@ -1,3 +1,5 @@
+import { Quote } from "lucide-react";
+
 const testimonials = [
   {
     name: "Rohit Tiwari",
@@ -55,14 +57,18 @@ const Testimonials = () => {
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 text-left shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+              className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-blue-50/60 p-6 text-left shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-blue-100 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 sm:p-7"
             >
-              <div className="mb-5 flex items-center gap-4">
+              <Quote
+                aria-hidden="true"
+                className="absolute right-5 top-5 h-8 w-8 text-blue-200"
+              />
+              <div className="relative z-10 mb-5 flex items-center gap-4">
                 {t.initials ? (
                   <div
                     role="img"
                     aria-label={`${t.name} initials`}
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-700 font-bold text-white"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-600 font-bold text-white shadow-sm shadow-blue-700/20"
                   >
                     {t.initials}
                   </div>
@@ -77,7 +83,7 @@ const Testimonials = () => {
                   <h3 className="font-semibold text-slate-900">{t.name}</h3>
                 </div>
               </div>
-              <p className="flex-1 text-sm leading-6 text-slate-600">
+              <p className="relative z-10 flex-1 border-l-2 border-blue-100 pl-4 text-sm leading-6 text-slate-600">
                 {t.feedback}
               </p>
             </div>

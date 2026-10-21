@@ -9,7 +9,7 @@ const WhatsAppIcon = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-[999] isolate flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform duration-300 hover:scale-110 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
+      className="fixed bottom-5 left-5 z-[999] isolate flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform duration-300 hover:scale-110 sm:bottom-8 sm:left-8 sm:h-16 sm:w-16"
       aria-label="Contact us on WhatsApp"
     >
       <FaWhatsapp className="relative z-10 h-8 w-8" aria-hidden="true" />

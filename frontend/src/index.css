@@ -5,7 +5,7 @@
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   color: #0f172a;
-  background: #f8fafc;
+  background: #f5f8fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +22,15 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: #f8fafc;
+  background-color: #f5f8fc;
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgb(219 234 254 / 60%), transparent 34rem),
+    radial-gradient(ellipse at 88% 20%, rgb(165 243 252 / 24%), transparent 30rem),
+    linear-gradient(rgb(30 64 175 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(30 64 175 / 3%) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+  background-position: center, center, 0 0, 0 0;
+  background-attachment: fixed;
 }
 
 button,
@@ -37,9 +45,154 @@ textarea {
   background: #2563eb;
 }
 
+::placeholder {
+  color: #94a3b8;
+}
+
 :focus-visible {
   outline: 3px solid #38bdf8;
   outline-offset: 3px;
+}
+
+main {
+  width: 100%;
+}
+
+header,
+footer {
+  flex-shrink: 0;
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes hero-type {
+  from {
+    transform: translateY(-1px) rotate(-1deg);
+  }
+
+  to {
+    transform: translateY(2px) rotate(1deg);
+  }
+}
+
+@keyframes hero-cursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.ambient-float {
+  animation: ambient-drift 7s ease-in-out infinite;
+}
+
+.hero-float-card {
+  animation: hero-float 4.5s ease-in-out infinite;
+}
+
+.hero-float-card--secondary {
+  animation-delay: -2.2s;
+}
+
+.hero-working-arm {
+  transform-box: fill-box;
+  transform-origin: 8% 50%;
+  animation: hero-type 0.55s ease-in-out infinite alternate;
+}
+
+.hero-screen-cursor {
+  animation: hero-cursor 1s steps(2, start) infinite;
+}
+
+.hero-screen-glow {
+  animation: hero-glow 2.4s ease-in-out infinite;
+}
+
+main :where(section, article, a)[class*="rounded-2xl"][class*="bg-white"] {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  main :where(section, article, a)[class*="rounded-2xl"][class*="bg-white"]:hover {
+    border-color: rgb(147 197 253 / 70%);
+    box-shadow: 0 20px 45px -30px rgb(30 64 175 / 35%);
+    transform: translateY(-3px);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(a, button, main > section, [data-aos]) {
+    position: relative;
+  }
+
+  :where(a, button, main > section, [data-aos])::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        circle,
+        transparent 0 31%,
+        rgb(96 165 250 / 28%) 33% 34%,
+        transparent 36% 55%,
+        rgb(34 211 238 / 20%) 57% 58%,
+        transparent 60%
+      )
+      center / 0 0 no-repeat;
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  :where(a, button, main > section, [data-aos]):hover::after {
+    animation: water-ripple 1.6s ease-out infinite;
+  }
+
+  @keyframes water-ripple {
+    0% {
+      background-size: 12% 12%;
+      opacity: 0.55;
+    }
+
+    100% {
+      background-size: 180% 180%;
+      opacity: 0;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,5 +203,12 @@ textarea {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hero-working-arm,
+  .hero-screen-cursor,
+  .hero-screen-glow,
+  .hero-float-card {
+    animation: none !important;
   }
 }

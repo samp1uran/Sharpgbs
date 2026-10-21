@@ -10,7 +10,7 @@ const Image = ({ src, alt, obj = "cover" }) => {
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-100 ${
+      className={`group relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-100 ${
         obj === "contain" ? "min-h-56 p-4" : "aspect-[4/3]"
       }`}
     >
@@ -34,7 +34,7 @@ const Image = ({ src, alt, obj = "cover" }) => {
           alt={alt}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
-          className={`${imageClass} transition-opacity duration-300 ${
+          className={`${imageClass} transition-[opacity,transform] duration-500 group-hover:scale-[1.025] ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />

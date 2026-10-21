@@ -23,13 +23,13 @@ export default function ServicesGrid() {
         <Link
           key={link}
           to={link}
-          className="group flex min-h-40 items-start gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg focus-visible:outline-offset-4"
+          className="group flex min-h-44 items-start gap-5 rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 focus-visible:outline-offset-4 sm:p-7"
         >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700 transition-colors group-hover:bg-blue-700 group-hover:text-white">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition duration-200 group-hover:bg-blue-700 group-hover:text-white group-hover:ring-blue-700">
             {icon}
           </span>
           <span className="flex-1">
-            <span className="flex items-center justify-between gap-3 font-semibold text-slate-900">
+            <span className="flex items-center justify-between gap-3 font-bold text-slate-950">
               {title}
               <ArrowUpRight
                 aria-hidden="true"

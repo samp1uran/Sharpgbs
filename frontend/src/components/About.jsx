@@ -6,8 +6,7 @@ import { Sparkles, Users, Target } from "lucide-react";
 const About = () => {
   return (
     <AnimatedPage>
-      {/* Changed py-8 to pt-8 pb-0 to remove bottom whitespace */}
-      <main className="px-4 pt-8 pb-0 max-w-7xl mx-auto leading-relaxed overflow-hidden">
+      <main className="mx-auto max-w-7xl overflow-hidden px-4 py-12 leading-relaxed sm:px-6 sm:py-16 lg:px-8">
         <div className="space-y-12 lg:space-y-16">
           
           {/* Header Section */}
