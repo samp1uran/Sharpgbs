@@ -37,6 +37,12 @@ const testimonials = [
     feedback:
       "Working with the team at Sharp GBS has been a game-changer for our organization. They took the time to deeply understand our challenges and delivered tailored solutions that perfectly aligned with our business goals.",
   },
+    {
+    name: "Karamjeet Singh",
+    initials: "KS",
+    feedback:
+      "Saddi Shop lai Sharp GBS naal judna bilkul sahi decision si. Ohna ne ground level te aake sadde business challenges nu samjheya. The tailored solutions they delivered were spot on, te sadde long-term business goals naal perfectly align kar gaye. Truly a game-changer team jithe tusi poora trust kar sakde ho.",
+  },
 ];
 
 const Testimonials = () => {

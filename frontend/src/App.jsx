@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
 import WhatsAppIcon from "./components/WhatsAppIcon";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import RouteSeo from "./components/RouteSeo";
 
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
   return (
     <Router>
       <div className="relative min-h-screen flex flex-col">
+        <RouteSeo />
         <Header />
         
         {/* 2. Main Content Area with Route Animations */}
