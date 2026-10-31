@@ -5,6 +5,15 @@ import ServicesGrid from "./ServicesGrid";
 import Testimonials from "./Testimonals";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { ExpertiseChips } from "./StyledUI";
+
+const expertise = [
+  "Bookkeeping",
+  "WordPress management",
+  "Data analysis",
+  "Content writing",
+  "Digital consulting",
+];
 
 export default function Home() {
   return (
@@ -53,6 +62,13 @@ export default function Home() {
               <HomeWorkspaceIllustration />
             </div>
           </div>
+        </section>
+
+        <section aria-label="Our expertise" className="space-y-5 text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-700">
+            Our expertise
+          </p>
+          <ExpertiseChips items={expertise} />
         </section>
 
         <section
