@@ -14,11 +14,6 @@ const PAGES = {
     description:
       "Learn about Sharp GBS, a Ludhiana team delivering web development, WordPress management, bookkeeping, data analysis and digital consulting.",
   },
-  "/services": {
-    title: "Our Services | Web Development, WordPress & Bookkeeping | Sharp GBS",
-    description:
-      "Explore Sharp GBS services: website development, WordPress management, SEO, speed optimization, bookkeeping and data analysis.",
-  },
   "/services/development": {
     title: "Web Development & WordPress Services in Ludhiana | Sharp GBS",
     description:

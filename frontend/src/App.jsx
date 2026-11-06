@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import "./index.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
-import Services from "./components/Services";
 import Contact from "./components/Contact";
 import FinancialServices from "./components/FinancialServices";
 import Development from "./components/Development";
@@ -41,7 +45,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
-              <Route path="/services" element={<Services />} />
+              <Route path="/services" element={<Navigate to="/" replace />} />
               <Route path="/contact" element={<Contact />} />
               <Route
                 path="/services/financialServices"

@@ -33,7 +33,6 @@ const Footer = () => {
           <h2 className="text-sm font-semibold text-white">Explore</h2>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li><Link to="/about" className="transition hover:text-white">About us</Link></li>
-            <li><Link to="/services" className="transition hover:text-white">Services</Link></li>
             <li><Link to="/contact" className="transition hover:text-white">Contact</Link></li>
           </ul>
         </nav>
