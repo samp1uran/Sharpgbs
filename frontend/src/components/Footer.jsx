@@ -33,6 +33,7 @@ const Footer = () => {
           <h2 className="text-sm font-semibold text-white">Explore</h2>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li><Link to="/about" className="transition hover:text-white">About us</Link></li>
+            <li><Link to="/courses" className="transition hover:text-white">Courses</Link></li>
             <li><Link to="/contact" className="transition hover:text-white">Contact</Link></li>
           </ul>
         </nav>
@@ -69,8 +70,7 @@ const Footer = () => {
             All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <Link to="/privacy" className="transition hover:text-slate-200">Privacy</Link>
-            <Link to="/terms" className="transition hover:text-slate-200">Terms</Link>
+            <Link to="/legal" className="transition hover:text-slate-200">Privacy &amp; Terms</Link>
           </div>
         </div>
       </div>

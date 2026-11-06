@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
-import Privacy from "./components/Privacy";
-import Terms from "./components/Terms";
+import Legal from "./components/Legal";
+import Courses from "./components/Courses";
+import CourseDetail from "./components/CourseDetail";
+import Admin from "./components/Admin";
 import Contact from "./components/Contact";
 import FinancialServices from "./components/FinancialServices";
 import Development from "./components/Development";
@@ -43,8 +45,18 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:slug" element={<CourseDetail />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route
+                path="/privacy"
+                element={<Navigate to="/legal#privacy" replace />}
+              />
+              <Route
+                path="/terms"
+                element={<Navigate to="/legal#terms" replace />}
+              />
               <Route path="/services" element={<Navigate to="/" replace />} />
               <Route path="/contact" element={<Contact />} />
               <Route

@@ -1,12 +1,10 @@
-import AnimatedPage from "./AnimatedPage";
 import ContactShortcut from "./ContactShortcut";
 import Image from "./Image";
 import { ShieldCheck, Database, FileText, Cookie } from "lucide-react";
 
-const Privacy = () => {
+const Privacy = ({ id }) => {
   return (
-    <AnimatedPage>
-      <main className="px-4 pt-8 pb-12 max-w-4xl mx-auto leading-relaxed overflow-hidden">
+      <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-24 px-4 pt-8 pb-12 max-w-4xl mx-auto leading-relaxed overflow-hidden">
         <div className="space-y-10 lg:space-y-12">
           
           {/* Header Section */}
@@ -19,9 +17,9 @@ const Privacy = () => {
               <ShieldCheck className="w-4 h-4" />
               Secure & Transparent
             </div>
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h2 id={`${id}-heading`} className="text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Privacy Policy
-            </h1>
+            </h2>
             <p className="text-slate-500 font-medium text-lg">
               Effective Date: April 20, 2025
             </p>
@@ -180,8 +178,7 @@ const Privacy = () => {
           </section>
 
         </div>
-      </main>
-    </AnimatedPage>
+      </section>
   );
 };
 

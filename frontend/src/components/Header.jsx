@@ -5,9 +5,9 @@ import { Menu, X } from "lucide-react";
 const links = [
   { to: "/", label: "Home", end: true },
   { to: "/about", label: "About" },
+  { to: "/courses", label: "Courses" },
   { to: "/contact", label: "Contact" },
-  { to: "/privacy", label: "Privacy" },
-  { to: "/terms", label: "Terms" },
+  { to: "/legal", label: "Privacy & Terms" },
 ];
 
 const linkClass = ({ isActive }) =>

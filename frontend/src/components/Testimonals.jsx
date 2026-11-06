@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Quote } from "lucide-react";
+import { API_BASE, getInitials } from "../api";
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     name: "Rohit Tiwari",
     initials: "RT",
@@ -46,6 +48,23 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(`${API_BASE}/testimonials`, { signal: controller.signal })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((result) => setTestimonials(result.testimonials))
+      .catch((error) => {
+        if (error?.name !== "AbortError") setTestimonials(fallbackTestimonials);
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  if (!testimonials?.length) return null;
+
   return (
     <section className="space-y-8" id="testimonials">
       <div className="mx-auto max-w-2xl space-y-3 text-center">
@@ -60,9 +79,9 @@ const Testimonials = () => {
         </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, index) => (
+          {testimonials.map((t) => (
             <div
-              key={index}
+              key={t.id ?? t.name}
               className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-blue-50/60 p-6 text-left shadow-[0_12px_35px_-28px_rgba(15,23,42,0.4)] transition duration-200 hover:-translate-y-1 hover:border-blue-100 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 sm:p-7"
             >
               <Quote
@@ -70,21 +89,13 @@ const Testimonials = () => {
                 className="absolute right-5 top-5 h-8 w-8 text-blue-200"
               />
               <div className="relative z-10 mb-5 flex items-center gap-4">
-                {t.initials ? (
-                  <div
-                    role="img"
-                    aria-label={`${t.name} initials`}
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-600 font-bold text-white shadow-sm shadow-blue-700/20"
-                  >
-                    {t.initials}
-                  </div>
-                ) : (
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-slate-100"
-                  />
-                )}
+                <div
+                  role="img"
+                  aria-label={`${t.name} initials`}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-600 font-bold text-white shadow-sm shadow-blue-700/20"
+                >
+                  {getInitials(t.name)}
+                </div>
                 <div>
                   <h3 className="font-semibold text-slate-900">{t.name}</h3>
                 </div>
